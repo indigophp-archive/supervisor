@@ -172,4 +172,114 @@ class Supervisor
     {
         return new Process($name, $this->connector);
     }
+
+    /**
+     * Return the version of the RPC API used by supervisord
+     *
+     * @return string version version id
+     */
+    public function getAPIVersion()
+    {
+        return $this->connector->call('supervisor', 'getAPIVersion');
+    }
+
+    /**
+     * Return the version of the supervisor package in use by supervisord
+     *
+     * @return string version version id
+     */
+    public function getSupervisorVersion()
+    {
+        return $this->connector->call('supervisor', 'getSupervisorVersion');
+    }
+
+    /**
+     * Return identifiying string of supervisord
+     *
+     * @return string identifier identifying string
+     */
+    public function getIdentification()
+    {
+        return $this->connector->call('supervisor', 'getIdentification');
+    }
+
+    /**
+     * Return the PID of supervisord
+     *
+     * @return integer PID
+     */
+    public function getPID()
+    {
+        return $this->connector->call('supervisor', 'getPID');
+    }
+
+    /**
+     * Read length bytes from the main log starting at offset
+     *
+     * @param integer $offset offset to start reading from
+     * @param integer $length length number of bytes to read from the log
+     *
+     * @return string result Bytes of log
+     */
+    public function readLog($offset, $length)
+    {
+        return $this->connector->call('supervisor', 'readLog', array($offset, $length));
+    }
+
+    /**
+     * Clear the main log.
+     *
+     * @return boolean result always returns True unless error
+     */
+    public function clearLog()
+    {
+        return $this->connector->call('supervisor', 'clearLog');
+    }
+
+    /**
+     * Start all processes listed in the configuration file
+     *
+     * @param boolean $wait Wait for each process to be fully started
+     *
+     * @return array result An array containing start statuses
+     */
+    public function startAllProcesses($wait = true)
+    {
+        return $this->connector->call('supervisor', 'startAllProcesses', array($wait));
+    }
+
+    /**
+     * Stop all processes listed in the configuration file
+     *
+     * @param boolean $wait Wait for each process to be fully stoped
+     *
+     * @return array result An array containing start statuses
+     */
+    public function stopAllProcesses($wait = true)
+    {
+        return $this->connector->call('supervisor', 'stopAllProcesses', array($wait));
+    }
+
+    /**
+     * Send an event that will be received by event listener subprocesses subscribing to the RemoteCommunicationEvent.
+     *
+     * @param string $type String for the “type” key in the event header
+     * @param string $data Data for the event body
+     *
+     * @return boolean Always return True
+     */
+    public function sendRemoteCommEvent($type, $data)
+    {
+        return $this->connector->call('supervisor', 'sendRemoteCommEvent', array($type, $data));
+    }
+
+    /**
+     * Clear all process log files
+     *
+     * @return boolean result Always return true
+     */
+    public function clearAllProcessLogs()
+    {
+        return $this->connector->call('supervisor', 'clearAllProcessLogs');
+    }
 }
