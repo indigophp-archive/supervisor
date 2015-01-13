@@ -1,3 +1,11 @@
+> **DEPRECATION NOTICE**
+
+> This package has been moved under SupervisorPHP.
+
+> https://github.com/supervisorphp/supervisor
+
+> For details see http://supervisorphp.com
+
 # Indigo Supervisor
 
 [![Latest Version](https://img.shields.io/github/release/indigophp/supervisor.svg?style=flat-square)](https://github.com/indigophp/supervisor/releases)
